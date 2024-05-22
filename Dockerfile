@@ -7,7 +7,7 @@ COPY go.sum ./
 
 COPY *.go ./
 
-RUN go mod download
+#RUN go mod download
 RUN go mod vendor
 RUN go mod tidy
 
