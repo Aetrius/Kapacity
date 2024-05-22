@@ -14,8 +14,8 @@ RUN go mod vendor
 RUN go mod tidy
 
 # Build the application and set executable permissions
-RUN go build -o /krv && chmod +x /krv
+RUN go build -o /kube-resource-viewer
 
-EXPOSE 80
+EXPOSE 8080
 
-CMD ["/krv"]
+CMD ["/kube-resource-viewer"]
