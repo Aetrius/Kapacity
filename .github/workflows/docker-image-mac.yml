@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image CI - mac
 
 on:
   push:
@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile.mac --tag kube-resource-viewer:mac-$(date +%s)
+      run: docker build . --file Dockerfile.mac --tag kube-resource-viewer-mac:$(date +%s)
