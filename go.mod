@@ -1,8 +1,6 @@
-module main
+module krv
 
-go 1.22.0
-
-toolchain go1.22.1
+go 1.22.1
 
 require (
 	k8s.io/apimachinery v0.30.1
