@@ -42,7 +42,7 @@ jobs:
         id: image-meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/kube-resource-viewer
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Build and push docker image
         uses: docker/build-push-action@v3
