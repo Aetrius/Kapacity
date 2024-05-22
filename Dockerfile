@@ -1,23 +1,21 @@
-FROM golang:1.22-alpine
+# Use an official Go runtime as a parent image
+FROM golang:1.19-alpine
 
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy go mod and sum files
-COPY go.mod go.sum ./
+# Copy the current directory contents into the container at /app
+COPY . .
 
-# Download all dependencies. Dependencies will be cached if the go.mod and go.sum files are not changed
-RUN go mod download
+# Download all dependencies. Dependencies will be cached if the go.mod and go.sum files do not change
 RUN go mod vendor
 RUN go mod tidy
-
-# Copy the source code into the container
-COPY *.go ./
 
 # Build the Go app
 RUN go build -o /kube-resource-viewer
 
-# Expose port 8080 to the outside world
+# Make port 8080 available to the world outside this container
 EXPOSE 8080
 
-# Command to run the executable
+# Run the executable
 CMD ["/kube-resource-viewer"]
