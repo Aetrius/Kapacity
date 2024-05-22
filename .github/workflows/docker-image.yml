@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image CI - Linux
 
 on:
   push:
@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag kube-resource-viewer:$(date +%s)
+      run: docker build . --file Dockerfile --tag kube-resource-viewer-linux:$(date +%s)
