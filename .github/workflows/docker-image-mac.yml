@@ -48,7 +48,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: Dockerfile.mac
+          file: Dockerfile
           platforms: ${{ env.TARGET_PLATFORMS }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.image-meta.outputs.tags }}
