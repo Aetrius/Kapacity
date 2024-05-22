@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-resource-viewer-deployment
+  namespace: kube-resource-viewer
+  labels:
+    app: kube-resource-viewer
+spec:
+  replicas: 2  # Specify the number of replicas
+  selector:
+    matchLabels:
+      app: kube-resource-viewer
+  template:
+    metadata:
+      labels:
+        app: kube-resource-viewer
+    spec:
+      containers:
+      - name: kube-resource-viewer
+        image: ghcr.io/aetrius/kube-resource-viewer:main
+        ports:
+        - containerPort: 8080  # Adjust the port according to your application

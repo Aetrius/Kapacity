@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-resource-viewer-service
+  namespace: kube-resource-viewer
+  labels:
+    app: kube-resource-viewer
+spec:
+  type: ClusterIP  # Use NodePort or LoadBalancer if external access is required
+  selector:
+    app: kube-resource-viewer
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP

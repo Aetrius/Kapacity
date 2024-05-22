@@ -4,15 +4,15 @@ WORKDIR /app
 
 COPY go.mod ./
 COPY go.sum ./
-COPY *.go ./
 COPY . .
 
 RUN go mod download
 RUN go mod vendor 
 RUN go mod tidy
 
-RUN go build -o /krv
+# Build the application and set executable permissions
+RUN go build -o /krv && chmod +x /krv
 
 EXPOSE 80
 
-CMD [ "/krv" ]
+CMD ["/krv"]
