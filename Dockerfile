@@ -8,7 +8,7 @@ COPY go.sum ./
 COPY *.go ./
 
 #RUN go mod download
-RUN go mod vendor
+#RUN go mod vendor
 RUN go mod tidy
 
 RUN go build -o /kube-resource-viewer
