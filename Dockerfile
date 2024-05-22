@@ -1,5 +1,8 @@
 FROM golang:1.22-alpine as build
 
+ENV GOOS=linux
+ENV GOARCH=amd64 
+
 WORKDIR /app
 
 COPY go.mod ./

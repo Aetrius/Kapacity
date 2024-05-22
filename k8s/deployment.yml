@@ -6,7 +6,7 @@ metadata:
   labels:
     app: kube-resource-viewer
 spec:
-  replicas: 2  # Specify the number of replicas
+  replicas: 2
   selector:
     matchLabels:
       app: kube-resource-viewer
@@ -15,8 +15,10 @@ spec:
       labels:
         app: kube-resource-viewer
     spec:
+      serviceAccountName: kube-resource-viewer-sa  # Specify the ServiceAccount here
       containers:
       - name: kube-resource-viewer
         image: ghcr.io/aetrius/kube-resource-viewer:main
+        imagePullPolicy: Always
         ports:
-        - containerPort: 8080  # Adjust the port according to your application
+        - containerPort: 8080
