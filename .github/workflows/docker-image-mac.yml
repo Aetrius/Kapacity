@@ -47,8 +47,8 @@ jobs:
       - name: Build and push docker image
         uses: docker/build-push-action@v3
         with:
-          context: kapacity-collector/.
-          file: kapacity-collector/Dockerfile
+          context: kapacity-collector/
+          file: Dockerfile
           platforms: ${{ env.TARGET_PLATFORMS }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.image-meta.outputs.tags }}
