@@ -48,7 +48,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: kube-capacity/Dockerfile  # Updated path to the Dockerfile
+          file: kapacity-collector/Dockerfile  # Updated path to the Dockerfile
           platforms: ${{ env.TARGET_PLATFORMS }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.image-meta.outputs.tags }}
