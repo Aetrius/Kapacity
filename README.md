@@ -11,6 +11,8 @@ Kapacity is an open-source capacity management tool designed to optimize and str
 - **kapacity-interface**: A React application providing a dynamic and responsive user interface.
 - **kapacity-api**: A Go (Golang) based API that interfaces between the database and the front-end application.
 
+![kapacity diagram](images/diagram.png)
+
 ## Getting Started
 
 tbd...
