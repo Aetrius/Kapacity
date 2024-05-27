@@ -1,4 +1,4 @@
-# Kapacity
+# Kapacity -  Kubernetes Capacity Management
 
 Kapacity is an open-source capacity management tool designed to optimize and streamline data collection and visualization processes within Kubernetes environments. This tool efficiently collects data on namespaces, deployments, and statefulsets, then integrates seamlessly with the Kapacity-API to store this data in a PostgreSQL database. The insights derived from this data are visualized through the Kapacity Interface, providing a clear and actionable overview of resource utilization.
 
