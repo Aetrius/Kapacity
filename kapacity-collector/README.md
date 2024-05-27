@@ -1,1 +1,0 @@
-# Kube-Resource-Viewer
