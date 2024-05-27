@@ -2,8 +2,7 @@ name: Build Docker Image
 env:
   TARGET_PLATFORMS: linux/amd64
   REGISTRY: ghcr.io
-  IMAGE_NAME: kapacity-collector
-
+  IMAGE_NAME: ${{ github.repository }}-collector
 on:
   pull_request: {}
   push:
@@ -37,13 +36,13 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}  # It's safer to use GITHUB_TOKEN if possible
+          password: ${{ secrets.REPO_TOKEN }}
 
       - name: Generate docker metadata
         id: image-meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-collector
 
       - name: Build and push docker image
         uses: docker/build-push-action@v3
