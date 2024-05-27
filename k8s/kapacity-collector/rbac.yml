@@ -4,8 +4,8 @@ metadata:
   name: app-cluster-role-binding
 subjects:
 - kind: ServiceAccount
-  namespace: kube-resource-viewer
-  name: kube-resource-viewer-sa  # This should match the ServiceAccount name
+  namespace: kapacity
+  name: kapacity-sa  # This should match the ServiceAccount name
 roleRef:
   kind: ClusterRole
   name: app-cluster-role

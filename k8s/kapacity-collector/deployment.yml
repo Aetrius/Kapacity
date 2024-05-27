@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kube-resource-viewer-deployment
-  namespace: kube-resource-viewer
+  name: kapacity-collector-deployment
+  namespace: kapacity
   labels:
-    app: kube-resource-viewer
+    app: kapacity-collector
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: kube-resource-viewer
+      app: kapacity-collector
   template:
     metadata:
       labels:
-        app: kube-resource-viewer
+        app: kapacity-collector
     spec:
-      serviceAccountName: kube-resource-viewer-sa  # Specify the ServiceAccount here
+      serviceAccountName: kapacity-collector-sa  # Specify the ServiceAccount here
       containers:
-      - name: kube-resource-viewer
+      - name: kapacity-collector
         image: ghcr.io/aetrius/kube-resource-viewer:main
         imagePullPolicy: Always
         ports:

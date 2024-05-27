@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kube-resource-viewer-service
-  namespace: kube-resource-viewer
+  name: kapacity-collector-service
+  namespace: kapacity
   labels:
-    app: kube-resource-viewer
+    app: kapacity-collector
 spec:
   type: ClusterIP  # Use NodePort or LoadBalancer if external access is required
   selector:
-    app: kube-resource-viewer
+    app: kapacity-collector
   ports:
     - port: 8080
       targetPort: 8080
