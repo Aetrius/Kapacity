@@ -2,7 +2,7 @@ name: Build Docker Image
 env:
   TARGET_PLATFORMS: linux/amd64
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}-collector
+  IMAGE_NAME: ${{ github.repository }}
 on:
   pull_request: {}
   push:
