@@ -11,11 +11,11 @@ RUN go mod vendor
 RUN go mod tidy
 
 # Build the application and set executable permissions
-RUN go build -o /kube-resource-viewer
+RUN go build -o /kapacity-collector
 
-RUN chmod +x /kube-resource-viewer
+RUN chmod +x /kapacity-collector
 
 EXPOSE 8080
 
-CMD ["/kube-resource-viewer"]
+CMD ["/kapacity-collector"]
 
