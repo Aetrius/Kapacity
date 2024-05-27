@@ -2,7 +2,7 @@ name: Build Docker Image
 env:
   TARGET_PLATFORMS: linux/amd64
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/kapacity-collector  # Custom image name format
+  IMAGE_NAME: kapacity-collector
 
 on:
   pull_request: {}
