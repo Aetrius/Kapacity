@@ -31,7 +31,7 @@ Contributions are what make the open-source community such an amazing place to l
 
 ## License
 
-Distributed under the MIT License. See [`LICENSE`](https://github.com/Aetrius/Kapacity/blob/main/LICENSE) for more information.
+Distributed under the Apache 2.0 License. See [`LICENSE`](https://github.com/Aetrius/Kapacity/blob/main/LICENSE) for more information.
 
 ## Contact
 
