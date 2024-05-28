@@ -31,8 +31,14 @@ spec:
             while true; do
               # Fetch data from a URL
               DATA=$(curl http://localhost:8080/)
+              CURRENT_TIME=$(date +"%Y-%m-%d %H:%M:%S")
               # Post data to the API endpoint
-              curl -X POST -H "Content-Type: application/json" -d "$DATA" https://kapacity.dev.dc1.aetrius.dev
+              RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/json" -d "$DATA" https://kapacity.dev.dc1.aetrius.dev)
+              if [ "$RESPONSE" -eq 200 ]; then
+                echo "$CURRENT_TIME: Successfully posted data to external API"
+              else
+                echo "$CURRENT_TIME: Failed to post data to external API, HTTP status: $RESPONSE"
+              fi
               # Sleep for some time if needed
               sleep 3600
             done
