@@ -18,7 +18,21 @@ spec:
       serviceAccountName: kapacity-collector-sa  # Specify the ServiceAccount here
       containers:
       - name: kapacity-collector
-        image: ghcr.io/aetrius/kube-resource-viewer:main
+        image: ghcr.io/aetrius/kapacity-collector:main
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
+      - name: sidecar-kapacity-publisher
+        image: quay.io/curl/curl:latest
+        command: ["/bin/sh"]
+        args:
+          - "-c"
+          - |
+            while true; do
+              # Fetch data from a URL
+              DATA=$(curl http://localhost:8080/)
+              # Post data to the API endpoint
+              curl -X POST -H "Content-Type: application/json" -d "$DATA" https://kapacity.dev.dc1.aetrius.dev
+              # Sleep for some time if needed
+              sleep 3600
+            done
