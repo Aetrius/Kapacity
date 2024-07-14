@@ -1,10 +1,28 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import * as React from 'react';
+import { Root } from '@/root';
+import { createRoot } from 'react-dom/client';
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+import { routes } from '@/routes';
+import { ScrollRestoration } from '@/components/core/scroll-restoration';
+
+const root = createRoot(document.getElementById('root')!);
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: (
+      <Root>
+        <ScrollRestoration />
+        <Outlet />
+      </Root>
+    ),
+    children: [...routes],
+  },
+]);
+
+root.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
