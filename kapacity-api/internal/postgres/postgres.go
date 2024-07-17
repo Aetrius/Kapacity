@@ -20,11 +20,6 @@ var dbConnection PostgresConnection
 
 func Connect() gorm.DB {
 
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
-	}
-
 	var dbConnectionString = importVars()
 	connection := DB(dbConnectionString)
 
@@ -32,21 +27,20 @@ func Connect() gorm.DB {
 }
 
 func importVars() PostgresConnection {
-	fmt.Println("Loading environment variables...")
-	fmt.Println("DB_USER: ", os.Getenv("DB_USER"))
-	fmt.Println("DB_PORT: ", os.Getenv("DB_PORT"))
-	fmt.Println("DB_HOST: ", os.Getenv("DB_HOST"))
-	fmt.Println("DB_NAME: ", os.Getenv("DB_NAME"))
-	fmt.Println("DB_PASSWORD: ", os.Getenv("DB_PASSWORD"))
-	fmt.Println("ENVIRONMENT_ID: ", os.Getenv("ENVIRONMENT_ID"))
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Error loading .env file: %v", err)
+	}
+
+	// fmt.Println("Loading environment variables...")
 
 	dbConnection := PostgresConnection{
-		User:          os.Getenv("DB_USER"),
-		Port:          stringToInt(os.Getenv("DB_PORT")),
-		Host:          os.Getenv("DB_HOST"),
-		DBName:        os.Getenv("DB_NAME"),
-		Password:      os.Getenv("DB_PASSWORD"),
-		EnvironmentID: os.Getenv("ENVIRONMENT_ID"),
+		User:     GetEnvVariable("DB_USER"),
+		Port:     stringToInt(os.Getenv("DB_PORT")),
+		Host:     GetEnvVariable("DB_HOST"),
+		DBName:   GetEnvVariable("DB_NAME"),
+		Password: GetEnvVariable("DB_PASSWORD"),
 	}
 
 	return dbConnection
@@ -85,7 +79,7 @@ func DB(connectionInfo PostgresConnection) gorm.DB {
 	sqlDB.SetConnMaxLifetime(2 * time.Minute)
 
 	// Automatically create the table if it doesn't exist
-	db.AutoMigrate(&kapacity.Cluster{})
+	db.AutoMigrate(&kapacity.Cluster{}, &kapacity.Node{})
 
 	return *db
 }
