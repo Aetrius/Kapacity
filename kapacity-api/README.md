@@ -17,12 +17,12 @@ Runs an initial task and periodically runs based on a timer value. This timer is
     `
 
 Example Output
-    ```
+    `
         [INFO]:[2024-07-17T03:54:36Z][ Starting DB Sanity Check ]
         [INFO]:[2024-07-17T03:54:36Z][ Completed sanity check, sleeping for: 30s ]
         [INFO]:[2024-07-17T03:55:06Z][ Starting DB Sanity Check ]
         [INFO]:[2024-07-17T03:55:06Z][ Completed sanity check, sleeping for: 30s ]
-    ```
+    `
 
 ### ENV File
     `
