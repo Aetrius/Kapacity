@@ -79,7 +79,7 @@ func DB(connectionInfo PostgresConnection) gorm.DB {
 	sqlDB.SetConnMaxLifetime(2 * time.Minute)
 
 	// Automatically create the table if it doesn't exist
-	db.AutoMigrate(&kapacity.Cluster{}, &kapacity.Node{})
+	db.AutoMigrate(&kapacity.Cluster{}, &kapacity.Node{}, &kapacity.Application{})
 
 	return *db
 }
