@@ -1,6 +1,6 @@
 name: Build Docker Image
 env:
-  TARGET_PLATFORMS: linux/amd64
+  TARGET_PLATFORMS: linux/amd64,linux/arm64
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 on:
