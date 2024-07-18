@@ -33,3 +33,11 @@ Example Output
         DB_USER=
         DB_PASSWORD=
     `
+
+#### Running a local development database
+Connect using pgAdmin (target your localhost if running locally)
+
+`bash
+cd kapacity-api/
+docker-compose -f PG-Dockerfile up -d 
+`

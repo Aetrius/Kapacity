@@ -33,7 +33,7 @@ spec:
               DATA=$(curl http://localhost:8080/)
               CURRENT_TIME=$(date +"%Y-%m-%d %H:%M:%S")
               # Post data to the API endpoint
-              RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/json" -d "$DATA" https://kapacity.dev.dc1.aetrius.dev)
+              RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/json" -d "$DATA" http://localhost:8081)
               if [ "$RESPONSE" -eq 200 ]; then
                 echo "$CURRENT_TIME: Successfully posted data to external API"
               else
