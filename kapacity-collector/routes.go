@@ -21,6 +21,10 @@ func JsonPage(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	encoder := json.NewEncoder(w)
 	encoder.SetIndent("", "    ") // Set indentation: here using four spaces
+
+	err = encoder.Encode(err)
+	errorCheck(err, w) // write error from gather check
+
 	err = encoder.Encode(allContainerInfo)
 	errorCheck(err, w)
 }
