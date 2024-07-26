@@ -23,18 +23,23 @@ func JsonPage(w http.ResponseWriter, r *http.Request) {
 	encoder := json.NewEncoder(w)
 	encoder.SetIndent("", "    ") // Set indentation: here using four spaces
 
-	err = encoder.Encode(err)
-	errorCheck(err, w) // write error from gather check
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		fmt.Println("Error: " + err.Error())
+		return
+	}
 
 	err = encoder.Encode(allContainerInfo)
-	errorCheck(err, w)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		fmt.Println("Error: " + err.Error())
+		return
+	}
 }
 
 func errorCheck(errorIn error, w http.ResponseWriter) {
 	if errorIn != nil {
 		http.Error(w, errorIn.Error(), http.StatusInternalServerError)
-		fmt.Println(errorIn.Error())
-
 		return
 	}
 }

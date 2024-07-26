@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"os"
 
 	v1 "k8s.io/api/core/v1"
@@ -31,10 +32,15 @@ func kubernetesClientConnection() (*kubernetes.Clientset, error) {
 func getClientSet() (*rest.Config, error) {
 	var config *rest.Config
 	var err error
+
+	kubeconfig := os.Getenv("KUBECONFIG")
+
 	// Determine the configuration based on environment.
-	if kubeconfig := os.Getenv("KUBECONFIG"); kubeconfig != "" {
+	if kubeconfig != "" {
+		fmt.Println("running config from env var")
 		config, err = clientcmd.BuildConfigFromFlags("", kubeconfig)
 	} else {
+		fmt.Println("running config from within k8s - pod")
 		config, err = rest.InClusterConfig()
 	}
 
