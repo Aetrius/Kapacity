@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -32,6 +33,8 @@ func JsonPage(w http.ResponseWriter, r *http.Request) {
 func errorCheck(errorIn error, w http.ResponseWriter) {
 	if errorIn != nil {
 		http.Error(w, errorIn.Error(), http.StatusInternalServerError)
+		fmt.Println(errorIn.Error())
+
 		return
 	}
 }
