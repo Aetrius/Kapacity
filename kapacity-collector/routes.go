@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -21,6 +22,10 @@ func JsonPage(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	encoder := json.NewEncoder(w)
 	encoder.SetIndent("", "    ") // Set indentation: here using four spaces
+
+	err = encoder.Encode(err)
+	errorCheck(err, w) // write error from gather check
+
 	err = encoder.Encode(allContainerInfo)
 	errorCheck(err, w)
 }
@@ -28,6 +33,8 @@ func JsonPage(w http.ResponseWriter, r *http.Request) {
 func errorCheck(errorIn error, w http.ResponseWriter) {
 	if errorIn != nil {
 		http.Error(w, errorIn.Error(), http.StatusInternalServerError)
+		fmt.Println(errorIn.Error())
+
 		return
 	}
 }
