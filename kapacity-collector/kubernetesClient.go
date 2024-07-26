@@ -197,7 +197,12 @@ func getDaemonSets(namespaces *v1.NamespaceList, clientSet *kubernetes.Clientset
 func gatherKubernetesInfo() ([]PodInfo, error) {
 	var allContainerInfo []PodInfo
 	var err error
-	clientSet, _ := kubernetesClientConnection()
+	clientSet, err := kubernetesClientConnection()
+
+	if err != nil {
+		fmt.Println("Error: ", err)
+
+	}
 
 	namespaces, _ := getNamespaceData(clientSet)
 	deployments, _ := getDeploymentData(namespaces, clientSet)
