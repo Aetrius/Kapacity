@@ -204,11 +204,35 @@ func gatherKubernetesInfo() ([]PodInfo, error) {
 
 	}
 
-	namespaces, _ := getNamespaceData(clientSet)
-	deployments, _ := getDeploymentData(namespaces, clientSet)
-	statefulsets, _ := getStatefulsetData(namespaces, clientSet)
-	replicasets, _ := getReplicaSet(namespaces, clientSet)
-	daemonsets, _ := getDaemonSets(namespaces, clientSet)
+	namespaces, err := getNamespaceData(clientSet)
+
+	if err != nil {
+		errorCheckingK8s(err)
+	}
+
+	deployments, err := getDeploymentData(namespaces, clientSet)
+
+	if err != nil {
+		errorCheckingK8s(err)
+	}
+
+	statefulsets, err := getStatefulsetData(namespaces, clientSet)
+
+	if err != nil {
+		errorCheckingK8s(err)
+	}
+
+	replicasets, err := getReplicaSet(namespaces, clientSet)
+
+	if err != nil {
+		errorCheckingK8s(err)
+	}
+
+	daemonsets, err := getDaemonSets(namespaces, clientSet)
+
+	if err != nil {
+		errorCheckingK8s(err)
+	}
 
 	allContainerInfo = append(allContainerInfo, deployments...)
 	allContainerInfo = append(allContainerInfo, statefulsets...)
@@ -217,4 +241,11 @@ func gatherKubernetesInfo() ([]PodInfo, error) {
 
 	return allContainerInfo, err
 
+}
+
+func errorCheckingK8s(errorIn error) {
+	if errorIn != nil {
+		fmt.Println("Error: ", errorIn)
+		return
+	}
 }
