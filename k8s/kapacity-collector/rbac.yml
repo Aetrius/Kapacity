@@ -5,7 +5,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   namespace: kapacity
-  name: kapacity-sa  # This should match the ServiceAccount name
+  name: kapacity-collector-sa # This should match the ServiceAccount name
 roleRef:
   kind: ClusterRole
   name: app-cluster-role

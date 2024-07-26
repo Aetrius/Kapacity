@@ -16,7 +16,7 @@ func JsonPage(w http.ResponseWriter, r *http.Request) {
 	var allContainerInfo []PodInfo
 	var err error
 
-	allContainerInfo, _ = gatherKubernetesInfo()
+	allContainerInfo, err = gatherKubernetesInfo()
 
 	w.Header().Set("Content-Type", "application/json")
 	encoder := json.NewEncoder(w)
