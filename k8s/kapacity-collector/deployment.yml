@@ -33,12 +33,12 @@ spec:
               DATA=$(curl http://localhost:8080/)
               CURRENT_TIME=$(date +"%Y-%m-%d %H:%M:%S")
               # Post data to the API endpoint
-              RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/json" -d "$DATA" http://localhost:8081)
+              RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/json" -d "$DATA" http://192.168.1.32:8081/v1/node/)
               if [ "$RESPONSE" -eq 200 ]; then
                 echo "$CURRENT_TIME: Successfully posted data to external API"
               else
                 echo "$CURRENT_TIME: Failed to post data to external API, HTTP status: $RESPONSE"
               fi
               # Sleep for some time if needed
-              sleep 3600
+              sleep 1000
             done

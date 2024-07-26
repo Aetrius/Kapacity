@@ -32,5 +32,5 @@ func StartServer() {
 	setupClusterRoutes(v1.Group("/cluster"), dbConnection, EnvironmentID)
 	setupApplicationRoutes(v1.Group("/application"), dbConnection, EnvironmentID)
 
-	r.Run(":8080")
+	r.Run(":8081")
 }
