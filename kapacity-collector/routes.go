@@ -37,10 +37,10 @@ func JsonPage(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func errorCheck(errorIn error, w http.ResponseWriter) {
-	if errorIn != nil {
-		fmt.Println("Error: ", errorIn)
-		http.Error(w, errorIn.Error(), http.StatusInternalServerError)
-		return
-	}
-}
+// func errorCheck(errorIn error, w http.ResponseWriter) {
+// 	if errorIn != nil {
+// 		fmt.Println("Error: ", errorIn)
+// 		http.Error(w, errorIn.Error(), http.StatusInternalServerError)
+// 		return
+// 	}
+// }
