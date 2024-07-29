@@ -8,9 +8,9 @@ import (
 	"k8s.io/client-go/kubernetes"
 )
 
-func getDeploymentData(namespaces *v1.NamespaceList, clientSet *kubernetes.Clientset) ([]PodInfo, error) {
+func getDeploymentData(namespaces *v1.NamespaceList, clientSet *kubernetes.Clientset) ([]TypeInfo, error) {
 	var err error
-	var allNamespaceInfo []PodInfo
+	var allNamespaceInfo []TypeInfo
 
 	for _, ns := range namespaces.Items {
 		var deployments, err = clientSet.AppsV1().Deployments(ns.Name).List(context.TODO(), metav1.ListOptions{})
@@ -22,7 +22,7 @@ func getDeploymentData(namespaces *v1.NamespaceList, clientSet *kubernetes.Clien
 		for _, deploy := range deployments.Items {
 			owner := deploy.Labels["Owner"]
 			for _, c := range deploy.Spec.Template.Spec.Containers {
-				info := PodInfo{
+				info := TypeInfo{
 					Namespace:     ns.Name,
 					Type:          "Deployment",
 					Name:          deploy.Name,

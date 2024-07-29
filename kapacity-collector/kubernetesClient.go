@@ -7,6 +7,7 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
+	metricsv "k8s.io/metrics/pkg/client/clientset/versioned"
 )
 
 func kubernetesClientConnection() (*kubernetes.Clientset, error) {
@@ -21,6 +22,23 @@ func kubernetesClientConnection() (*kubernetes.Clientset, error) {
 	}
 
 	clientset, err = kubernetes.NewForConfig(config)
+
+	return clientset, err
+
+}
+
+func kubernetesMetricClientConnection() (*metricsv.Clientset, error) {
+	var config *rest.Config
+	var err error
+	var clientset *metricsv.Clientset
+
+	config, err = getClientSet()
+
+	if err != nil {
+		return clientset, err
+	}
+
+	clientset, err = metricsv.NewForConfig(config)
 
 	return clientset, err
 
@@ -45,14 +63,13 @@ func getClientSet() (*rest.Config, error) {
 
 }
 
-func gatherKubernetesInfo() ([]PodInfo, error) {
-	var allContainerInfo []PodInfo
+func gatherKubernetesInfo() ([]TypeInfo, error) {
+	var allContainerInfo []TypeInfo
 	var err error
 	clientSet, err := kubernetesClientConnection()
 
 	if err != nil {
 		fmt.Println("Error: ", err)
-
 	}
 
 	namespaces, err := getNamespaceData(clientSet)
@@ -65,6 +82,28 @@ func gatherKubernetesInfo() ([]PodInfo, error) {
 	allContainerInfo = append(allContainerInfo, statefulsets...)
 	allContainerInfo = append(allContainerInfo, replicasets...)
 	allContainerInfo = append(allContainerInfo, daemonsets...)
+
+	return allContainerInfo, err
+}
+
+func gatherKubernetesPods() ([]Pod, error) {
+	var allContainerInfo []Pod
+	var err error
+	clientSet, err := kubernetesClientConnection()
+
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
+
+	metricsClientSet, err := kubernetesMetricClientConnection()
+
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
+
+	pods, err := getPodData(clientSet, metricsClientSet)
+
+	allContainerInfo = append(allContainerInfo, pods...)
 
 	return allContainerInfo, err
 

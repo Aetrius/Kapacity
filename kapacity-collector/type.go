@@ -1,6 +1,6 @@
 package main
 
-type PodInfo struct {
+type TypeInfo struct {
 	Namespace     string `json:"namespace"`
 	Type          string `json:"type"`
 	Name          string `json:"name"`

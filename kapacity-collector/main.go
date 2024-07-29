@@ -8,6 +8,7 @@ import (
 func main() {
 	http.HandleFunc("/", WebHandler)
 	http.HandleFunc("/json", JsonHandler)
+	http.HandleFunc("/pods", PodsHandler)
 	fmt.Println("Server starting on port 8080...")
 	http.ListenAndServe(":8080", nil)
 }
@@ -18,4 +19,8 @@ func WebHandler(w http.ResponseWriter, r *http.Request) {
 
 func JsonHandler(w http.ResponseWriter, r *http.Request) {
 	JsonPage(w, r)
+}
+
+func PodsHandler(w http.ResponseWriter, r *http.Request) {
+	PodsJsonPage(w, r)
 }

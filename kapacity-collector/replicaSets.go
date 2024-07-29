@@ -8,9 +8,9 @@ import (
 	"k8s.io/client-go/kubernetes"
 )
 
-func getReplicaSet(namespaces *v1.NamespaceList, clientSet *kubernetes.Clientset) ([]PodInfo, error) {
+func getReplicaSet(namespaces *v1.NamespaceList, clientSet *kubernetes.Clientset) ([]TypeInfo, error) {
 	var err error
-	var allNamespaceInfo []PodInfo
+	var allNamespaceInfo []TypeInfo
 
 	for _, ns := range namespaces.Items {
 		var replicaSets, err = clientSet.AppsV1().ReplicaSets(ns.Name).List(context.TODO(), metav1.ListOptions{})
@@ -22,7 +22,7 @@ func getReplicaSet(namespaces *v1.NamespaceList, clientSet *kubernetes.Clientset
 		for _, deploy := range replicaSets.Items {
 			owner := deploy.Labels["Owner"]
 			for _, c := range deploy.Spec.Template.Spec.Containers {
-				info := PodInfo{
+				info := TypeInfo{
 					Namespace:     ns.Name,
 					Type:          "ReplicaSet",
 					Name:          deploy.Name,

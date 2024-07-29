@@ -8,9 +8,9 @@ import (
 	"k8s.io/client-go/kubernetes"
 )
 
-func getStatefulsetData(namespaces *v1.NamespaceList, clientSet *kubernetes.Clientset) ([]PodInfo, error) {
+func getStatefulsetData(namespaces *v1.NamespaceList, clientSet *kubernetes.Clientset) ([]TypeInfo, error) {
 	var err error
-	var allNamespaceInfo []PodInfo
+	var allNamespaceInfo []TypeInfo
 
 	for _, ns := range namespaces.Items {
 		var statefulsets, err = clientSet.AppsV1().StatefulSets(ns.Name).List(context.TODO(), metav1.ListOptions{})
@@ -22,7 +22,7 @@ func getStatefulsetData(namespaces *v1.NamespaceList, clientSet *kubernetes.Clie
 		for _, deploy := range statefulsets.Items {
 			owner := deploy.Labels["Owner"]
 			for _, c := range deploy.Spec.Template.Spec.Containers {
-				info := PodInfo{
+				info := TypeInfo{
 					Namespace:     ns.Name,
 					Type:          "Statefulset",
 					Name:          deploy.Name,
