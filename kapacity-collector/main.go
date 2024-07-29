@@ -7,7 +7,7 @@ import (
 
 func main() {
 	http.HandleFunc("/", WebHandler)
-	http.HandleFunc("/json", JsonHandler)
+	http.HandleFunc("/types", JsonHandler)
 	http.HandleFunc("/pods", PodsHandler)
 	fmt.Println("Server starting on port 8080...")
 	http.ListenAndServe(":8080", nil)
