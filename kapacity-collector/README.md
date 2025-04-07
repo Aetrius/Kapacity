@@ -12,3 +12,17 @@ This data is intended to be forwarded to the Kapacity-API for storage.
 
 -- Other Dir On MAC OS (navigate to path for the things)
 `export KUBECONFIG=$(echo "~/kubeconfigs/kubeconfig.yaml")`
+
+
+--- Execute Locally for testing
+`go run main`
+
+## API ENDPOINTS
+`/pods` - Pod specific information that breaks out per container, multi-container pods will have multiple pods listed but unique containers.
+`/types` - Deployment, Statefulset, ReplicaSet, etc.
+
+### TODO
+Add PVCs
+- include storageclass
+- include current size, maximum size
+
